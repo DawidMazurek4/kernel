@@ -1,7 +1,7 @@
 #include "stdint.h"
 #include "util.h"
 #include "interrupts/idt.h"
-#include "vga.h"
+#include "printf.h"
 #include "timer.h"
 
 uint64_t ticks;
@@ -10,7 +10,7 @@ const uint32_t frqp = 100;
 void onIrq0(struct InterruptRegisters* regs){
     ticks++;
 
-    print("tik tak");
+    printf("tik tak");
 }
 
 void initTimer(){

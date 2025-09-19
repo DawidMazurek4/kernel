@@ -41,33 +41,63 @@ void scrollUp(){
     }
 }
 
-void print(const char* s){
-    while(*s){
-        switch(*s){
-            case '\n':
-                newLine();
-                break;
-            case '\r':
-                column = 0;
-                break;
-            case '\t':
-                if (column == width){
-                    newLine();
-                }
-                uint16_t tabLen = 4 - (column % 4);
-                while (tabLen != 0){
-                    vga[line * width + (column++)] = ' ' | currentColor;
-                    tabLen--;
-                }
-                break;
-            default:
-                if (column == width){
-                    newLine();
-                }
+// void print(const char* s){
+//     while(*s){
+//         switch(*s){
+//             case '\n':
+//                 newLine();
+//                 break;
+//             case '\r':
+//                 column = 0;
+//                 break;
+//             case '\t':
+//                 if (column == width){
+//                     newLine();
+//                 }
+//                 uint16_t tabLen = 4 - (column % 4);
+//                 while (tabLen != 0){
+//                     vga[line * width + (column++)] = ' ' | currentColor;
+//                     tabLen--;
+//                 }
+//                 break;
+//             default:
+//                 if (column == width){
+//                     newLine();
+//                 }
 
-                vga[line * width + (column++)] = *s | currentColor;
-                break;
-        }
-        s++;
+//                 vga[line * width + (column++)] = *s | currentColor;
+//                 break;
+//         }
+//         s++;
+//     }
+// }
+
+
+void print(const char s){
+    
+    switch(s){
+        case '\n':
+            newLine();
+            break;
+        case '\r':
+            column = 0;
+            break;
+        case '\t':
+            if (column == width){
+                newLine();
+            }
+            uint16_t tabLen = 4 - (column % 4);
+            while (tabLen != 0){
+                vga[line * width + (column++)] = ' ' | currentColor;
+                tabLen--;
+            }
+            break;
+        default:
+            if (column == width){
+                newLine();
+            }
+
+            vga[line * width + (column++)] = s | currentColor;
+            break;
     }
 }

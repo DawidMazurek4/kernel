@@ -1,6 +1,6 @@
 #include "../stdint.h"
 #include "../util.h"
-#include "../vga.h"
+#include "../printf.h"
 #include "idt.h"
 
 struct  idt_entry_struct idt_entries[256];
@@ -139,10 +139,10 @@ unsigned char* exeption_messages[] = {
 
 void isr_handler(struct InterruptRegisters* regs){
     if(regs->int_no < 32){
-        print("\n");
-        print(exeption_messages[regs->int_no]);
-        print("\n");
-        print("exeption! system halted!\n");
+        printf("\n");
+        printf(exeption_messages[regs->int_no]);
+        printf("\n");
+        printf("exeption! system halted!\n");
         for(;;);
     }
 }
