@@ -57,31 +57,24 @@ void printf(const char* fmt, ...){
 }
 
 void print_int(int value) {
-    char buffer[12]; // Enough for 32-bit int
+    char buffer[12];
     int i = 0;
     int negative = 0;
-
     if (value == 0) {
         print('0');
         return;
     }
-
     if (value < 0) {
         negative = 1;
         value = -value;
     }
-
-    // Convert number to string in reverse
     while (value > 0) {
         buffer[i++] = (value % 10) + '0';
         value /= 10;
     }
-
     if (negative) {
         buffer[i++] = '-';
     }
-
-    // Print in reverse
     while (i--) {
         print(buffer[i]);
     }
