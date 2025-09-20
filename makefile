@@ -15,6 +15,7 @@ kernel:
 	$(gcc) $(flags) -c src/timer.c -o timer.o
 	$(gcc) $(flags) -c src/keyboard.c -o keyboard.o
 	$(gcc) $(flags) -c src/printf.c -o printf.o
+	$(gcc) $(flags) -c src/memory.c -o memory.o
 	
 
 boot:
@@ -23,7 +24,7 @@ boot:
 	nasm -f elf32 src/interrupts/idt.s -o idts.o
 
 image:
-	ld -m elf_i386 -T linker.ld -o kernel boot.o kernel.o vga.o gdt.o gdts.o util.o idt.o idts.o timer.o keyboard.o printf.o
+	ld -m elf_i386 -T linker.ld -o kernel boot.o kernel.o vga.o gdt.o gdts.o util.o idt.o idts.o timer.o keyboard.o printf.o memory.o
 	mv kernel cwlos/boot/kernel
 	grub-mkrescue -o kernel.iso cwlos/
 	rm *.o

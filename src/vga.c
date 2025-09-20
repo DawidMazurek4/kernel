@@ -4,7 +4,7 @@
 uint16_t column = 0;
 uint16_t line = 0;
 uint16_t* const vga = (uint16_t* const) 0xB8000;
-const uint16_t defaultColor = (COLOR8_LIGHT_GREY << 8) | (COLOR8_BLACK << 12);
+const uint16_t defaultColor = (COLOR8_WHITE << 8) | (COLOR8_BLACK << 12);
 uint16_t currentColor = defaultColor;
 
 void Reset(){
@@ -98,8 +98,10 @@ void print(const char s){
                 column = width;
                 line--;
             }
+            if(line >= 0 && column > 0){
+                vga[line * width + (--column)] = ' ' | currentColor;
+            }
             
-            vga[line * width + (--column)] = ' ' | currentColor;
             break;
         default:
             if (column == width){

@@ -4,13 +4,14 @@
 #include "timer.h"
 #include "keyboard.h"
 #include "printf.h"
-void kmain(void);
-void kmain(void){
+#include "multiboot.h"
+void kmain(uint32_t magic, struct multiboot_info* bootInfo);
+void kmain(uint32_t magic, struct multiboot_info* bootInfo){
     initGdt();
     // print("it is wodddrking");
     initIdt();
-    // initTimer();
+    initTimer();
     initKeyboard();
-    printf("to jest test! \n%i", 11);
+    // initMemory(bootInfo);
     for(;;);
 }

@@ -10,7 +10,7 @@ const uint32_t frqp = 100;
 void onIrq0(struct InterruptRegisters* regs){
     ticks++;
 
-    printf("tik tak");
+    // printf("tik tak");
 }
 
 void initTimer(){
