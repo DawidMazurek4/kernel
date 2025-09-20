@@ -92,6 +92,13 @@ void print(const char s){
                 tabLen--;
             }
             break;
+        case '\b':
+            if(column == 0 && line != 0){
+                column = width;
+                line--;
+            }
+            vga[line * width + (--column)] = ' ' | currentColor;
+            break;
         default:
             if (column == width){
                 newLine();
