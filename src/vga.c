@@ -77,6 +77,7 @@ void print(const char s){
     
     switch(s){
         case '\n':
+            vga[line * width + (column)] = ' ' | currentColor;
             newLine();
             break;
         case '\r':
@@ -97,6 +98,7 @@ void print(const char s){
                 column = width;
                 line--;
             }
+            
             vga[line * width + (--column)] = ' ' | currentColor;
             break;
         default:
@@ -107,4 +109,6 @@ void print(const char s){
             vga[line * width + (column++)] = s | currentColor;
             break;
     }
+    vga[line * width + (column+1)] = ' ' | currentColor;
+    vga[line * width + (column)] = '_' | currentColor;
 }
